@@ -1,0 +1,15 @@
+{
+  "name": "mock",
+  "version": "1.0.0",
+  "description": "Convert a CSV file to JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./src/file.test.js"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
