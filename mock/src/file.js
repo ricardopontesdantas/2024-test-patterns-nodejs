@@ -36,6 +36,20 @@ class File {
     }
     return { valid: true };
   }
+
+  static parseCsvToJson(csvString) {
+    const lines = csvString.split(/\r?\n/);
+    const firstLine = lines.shift();
+    const header = firstLine.split(",");
+    const users = lines.map((line) => {
+      const columns = line.split(",");
+      const user = {};
+      for (const index in columns) {
+        user[header[index]] = columns[index];
+      }
+      return user;
+    });
+    return users;
   }
 }
 
