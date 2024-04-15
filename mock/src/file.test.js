@@ -29,4 +29,18 @@ const error = require("./constants");
       "it should rejects if the header is invalid"
     );
   }
+  {
+    const filePath = "./mocks/valid-file.csv";
+    const result = await File.csvToJson(filePath);
+    const expected = [
+      { id: 1, name: "john", profession: "developer", age: 30 },
+      { id: 2, name: "helen", profession: "qa", age: 28 },
+      { id: 3, name: "bill", profession: "manager", age: 35 },
+    ];
+    assert.deepEqual(
+      result,
+      expected,
+      "it should return csv converted to json"
+    );
+  }
 })();
