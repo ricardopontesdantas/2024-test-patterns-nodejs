@@ -28,9 +28,14 @@ class File {
         valid: false,
       };
     }
+    if (fileWithoutHeader.length > options.maxLines) {
+      return {
+        error: error.FILE_LENGTH_ERROR_MESSAGE,
         valid: false,
       };
     }
+    return { valid: true };
+  }
   }
 }
 
