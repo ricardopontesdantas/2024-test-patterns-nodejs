@@ -24,6 +24,7 @@ const routes = {
       response.write("login failed");
       return response.end();
     }
+    response.writeHead(201);
     response.write("login successfully");
     return response.end();
   },
