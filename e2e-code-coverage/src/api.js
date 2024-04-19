@@ -44,3 +44,5 @@ function handler(request, response) {
 const app = http
   .createServer(handler)
   .listen(3000, () => console.log("running at 3000"));
+
+module.exports = app;
