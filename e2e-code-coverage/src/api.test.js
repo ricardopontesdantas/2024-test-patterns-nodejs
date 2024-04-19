@@ -13,4 +13,9 @@ describe("API Suite Test", () => {
       await supertest(app).get("/").expect(200);
     });
   });
+  describe("/contact:get", () => {
+    it("should request the contact route and must return http status 200", async () => {
+      await supertest(app).get("/contact").expect(200);
+    });
+  });
 });
