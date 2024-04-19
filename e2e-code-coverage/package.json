@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/api.js",
-    "test": ""
+    "test": "npx mocha src/*.test.js",
+    "test:watch": "npx mocha -w src/*.test.js"
   },
   "engines": {
     "node": "18"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.4.0",
+    "supertest": "^6.3.4"
+  }
 }

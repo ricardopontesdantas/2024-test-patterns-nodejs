@@ -24,6 +24,7 @@ const routes = {
       response.write("login failed");
       return response.end();
     }
+    response.writeHead(201);
     response.write("login successfully");
     return response.end();
   },
@@ -44,3 +45,5 @@ function handler(request, response) {
 const app = http
   .createServer(handler)
   .listen(3000, () => console.log("running at 3000"));
+
+module.exports = app;
