@@ -18,4 +18,12 @@ describe("API Suite Test", () => {
       await supertest(app).get("/contact").expect(200);
     });
   });
+  describe("/login:post", () => {
+    it("should request the login route an dmust return http status 201", async () => {
+      await supertest(app)
+        .post("/login")
+        .send({ username: "peter", password: "123456" })
+        .expect(201);
+    });
+  });
 });
