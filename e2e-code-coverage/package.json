@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/api.js",
     "test": "npx mocha src/*.test.js",
-    "test:watch": "npx mocha -w src/*.test.js"
+    "test:watch": "npx mocha -w src/*.test.js",
+    "test:cov": "npx nyc npm run test"
   },
   "engines": {
     "node": "18"
@@ -16,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "mocha": "^10.4.0",
+    "nyc": "^15.1.0",
     "supertest": "^6.3.4"
   }
 }
