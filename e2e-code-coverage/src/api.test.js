@@ -32,4 +32,9 @@ describe("API Suite Test", () => {
         .expect(401);
     });
   });
+  describe("/not-found:get", () => {
+    it("should request a non-existent route and must return http status 404", async () => {
+      await supertest(app).get("/not-found").expect(404);
+    });
+  });
 });
