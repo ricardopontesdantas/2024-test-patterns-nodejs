@@ -19,7 +19,7 @@ describe("API Suite Test", () => {
     });
   });
   describe("/login:post", () => {
-    it("should request the login route an dmust return http status 201", async () => {
+    it("should request the login route and must return http status 201", async () => {
       await supertest(app)
         .post("/login")
         .send({ username: "peter", password: "123456" })
