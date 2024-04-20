@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/api.js",
     "test": "npx mocha src/*.test.js",
-    "test:watch": "npx mocha -w src/*.test.js"
+    "test:watch": "npx mocha -w src/*.test.js",
+    "test:cov": "npx nyc npm run test"
   },
   "engines": {
     "node": "18"
