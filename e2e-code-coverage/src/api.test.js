@@ -25,5 +25,11 @@ describe("API Suite Test", () => {
         .send({ username: "peter", password: "123456" })
         .expect(201);
     });
+    it("should request the login route and must return http status 401", async () => {
+      await supertest(app)
+        .post("/login")
+        .send({ username: "john", password: "123123" })
+        .expect(401);
+    });
   });
 });
