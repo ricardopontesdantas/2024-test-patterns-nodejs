@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "seed": "node seed",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha **/**/*.test.js",
+    "test:watch": "npx mocha -w **/**/*.test.js",
+    "test:cov": "npx nyc npm run test"
   },
   "engines": {
     "node": "18"
@@ -14,6 +16,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "faker": "^5.5.3"
+    "chai": "^4.4.1",
+    "faker": "^5.5.3",
+    "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
+    "sinon": "^9.2.4"
   }
 }
