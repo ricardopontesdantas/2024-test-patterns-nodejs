@@ -6,6 +6,7 @@ const CarService = require("../../src/service/carService");
 const carsDatabase = join(__dirname, "..", "..", "database", "cars.json");
 const mocks = {
   carCategory: require("../mocks/valid-car-category"),
+  car: require("../mocks/valid-car"),
 };
 
 describe("CarService Suite Tests", () => {
@@ -36,5 +37,20 @@ describe("CarService Suite Tests", () => {
     const expected = input.carIds[carIndex];
     expect(carService.getRandomPositionFromArray.calledOnce).to.be.ok;
     expect(output).to.be.equal(expected);
+  });
+
+  it("given a carCategory it should return an available car", async () => {
+    const car = mocks.car;
+    const input = Object.create(mocks.carCategory);
+    input.carIds = [car.id];
+    sinon.spy(carService, carService.chooseRandomCar.name);
+    sinon
+      .stub(carService.carRepository, carService.carRepository.find.name)
+      .resolves(car);
+    const output = await carService.getAvailableCar(input);
+    const expected = mocks.car;
+    expect(carService.chooseRandomCar.calledOnce).to.be.ok;
+    expect(carService.carRepository.find.calledWithExactly(car.id));
+    expect(output).to.be.deep.equal(expected);
   });
 });
