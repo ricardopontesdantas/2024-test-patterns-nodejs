@@ -32,7 +32,7 @@ describe("CarService Suite Tests", () => {
     const carIndex = 0;
     sinon
       .stub(carService, carService.getRandomPositionFromArray.name)
-      .returns(0);
+      .returns(carIndex);
     const output = carService.chooseRandomCar(input);
     const expected = input.carIds[carIndex];
     expect(carService.getRandomPositionFromArray.calledOnce).to.be.ok;
