@@ -38,6 +38,25 @@ class CarService {
     const formattedPrice = this.currencyFormat.format(finalPrice);
     return formattedPrice;
   }
+
+  async rent(customer, carCategory, numberOfDays) {
+    const car = await this.getAvailableCar(carCategory);
+    const finalPrice = await this.calculateFinalPrice(
+      carCategory,
+      customer,
+      numberOfDays
+    );
+    const today = new Date();
+    today.setDate(today.getDate() + numberOfDays);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const dueDate = today.toLocaleDateString("pt-br", options);
+    return {
+      customer,
+      car,
+      amount: finalPrice,
+      dueDate,
+    };
+  }
 }
 
 module.exports = CarService;
