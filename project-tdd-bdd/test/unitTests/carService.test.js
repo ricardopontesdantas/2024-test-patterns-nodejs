@@ -3,10 +3,12 @@ const { expect } = require("chai");
 const { join } = require("path");
 const { createSandbox } = require("sinon");
 const CarService = require("../../src/service/carService");
+const Transaction = require("../../src/entities/transaction");
 const carsDatabase = join(__dirname, "..", "..", "database", "cars.json");
 const mocks = {
   carCategory: require("../mocks/valid-car-category"),
   car: require("../mocks/valid-car"),
+  customer: require("../mocks/valid-customer.json"),
 };
 
 describe("CarService Suite Tests", () => {
@@ -70,5 +72,32 @@ describe("CarService Suite Tests", () => {
     );
     const expected = carService.currencyFormat.format(244.4);
     expect(output).to.be.equal(expected);
+  });
+
+  it("given a customer and a car category it should return a transaction receipt", async () => {
+    const car = mocks.car;
+    const customer = Object.create(mocks.customer);
+    customer.age = 50;
+    const carCategory = {
+      ...mocks.carCategory,
+      price: 37.6,
+      carIds: [car.id],
+    };
+    const numberOfDays = 5;
+    const expectedAmount = carService.currencyFormat.format(244.4);
+    const dueDate = "10 de novembro de 2020";
+    const now = new Date(2020, 10, 5);
+    sinon.useFakeTimers(now.getTime());
+    sinon
+      .stub(carService.carRepository, carService.carRepository.find.name)
+      .resolves(car);
+    const output = await carService.rent(customer, carCategory, numberOfDays);
+    const expected = new Transaction({
+      customer,
+      car,
+      amount: expectedAmount,
+      dueDate,
+    });
+    expect(output).to.be.deep.equal(expected);
   });
 });
