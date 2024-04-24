@@ -53,4 +53,22 @@ describe("CarService Suite Tests", () => {
     expect(carService.carRepository.find.calledWithExactly(car.id));
     expect(output).to.be.deep.equal(expected);
   });
+
+  it("given a carCategory, customer and numberOfDays it should calculate final amount in real", async () => {
+    const carCategory = Object.create(mocks.carCategory);
+    carCategory.price = 37.6;
+    const customer = Object.create(mocks.customer);
+    customer.age = 50;
+    const numberOfDays = 5;
+    sinon
+      .stub(carService, "taxesBasedOnAge")
+      .get(() => [{ from: 40, to: 50, then: 1.3 }]);
+    const output = await carService.calculateFinalPrice(
+      carCategory,
+      customer,
+      numberOfDays
+    );
+    const expected = carService.currencyFormat.format(244.4);
+    expect(output).to.be.equal(expected);
+  });
 });
