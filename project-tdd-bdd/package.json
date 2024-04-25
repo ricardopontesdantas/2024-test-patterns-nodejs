@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/api.js",
     "seed": "node seed",
     "test": "npx mocha **/**/*.test.js",
     "test:watch": "npx mocha -w **/**/*.test.js",
@@ -20,6 +21,7 @@
     "faker": "^5.5.3",
     "mocha": "^8.4.0",
     "nyc": "^15.1.0",
-    "sinon": "^9.2.4"
+    "sinon": "^9.2.4",
+    "supertest": "^6.3.4"
   }
 }
