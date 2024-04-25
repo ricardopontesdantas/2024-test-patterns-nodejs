@@ -10,7 +10,7 @@ const routes = {
 
 function handle(request, response) {
   const { method, url } = request;
-  const routeKey = `${method}:${url}`.toLowerCase();
+  const routeKey = `${url}:${method}`.toLowerCase();
   const choosen = routes[routeKey] || routes.default;
   return choosen(request, response);
 }
