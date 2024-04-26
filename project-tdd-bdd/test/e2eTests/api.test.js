@@ -16,5 +16,21 @@ describe("API Suite Test", () => {
       await supertest(app).get("/non-existing").expect(404);
     });
   });
+
+  describe("/available-car:post", () => {
+    it("should request available car route and return http status 200", async () => {
+      await supertest(app)
+        .post("/available-car")
+        .send(mocks.validCarCategory)
+        .expect(200);
+    });
+
+    it("should request available car route and return http status 404", async () => {
+      await supertest(app)
+        .post("/available-car")
+        .send(mocks.invalidCarCategory)
+        .expect(404);
+    });
+  });
 });
 
