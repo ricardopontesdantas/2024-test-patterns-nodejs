@@ -30,6 +30,10 @@ describe("API Suite Test", () => {
         .expect(200);
     });
 
+    it("should request available car route and return http status 400", async () => {
+      await supertest(app).post("/available-car").send({}).expect(400);
+    });
+
     it("should request available car route and return http status 404", async () => {
       await supertest(app)
         .post("/available-car")
