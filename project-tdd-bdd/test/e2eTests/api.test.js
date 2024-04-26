@@ -41,5 +41,19 @@ describe("API Suite Test", () => {
         .expect(404);
     });
   });
-});
 
+  describe("/calculate-price:post", () => {
+    it("should request calculate price route and return http status 200", async () => {
+      const input = {
+        carCategory: mocks.validCarCategory,
+        customer: mocks.customer,
+        numberOfDays: 5,
+      };
+      await supertest(app).post("/calculate-price").send(input).expect(200);
+    });
+
+    it("should request calculate price route and return http status 400", async () => {
+      await supertest(app).post("/calculate-price").send({}).expect(400);
+    });
+  });
+});
