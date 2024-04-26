@@ -56,4 +56,34 @@ describe("API Suite Test", () => {
       await supertest(app).post("/calculate-price").send({}).expect(400);
     });
   });
+
+  describe("/transaction/register:post", () => {
+    it("should request transaction register route and return http status 201", async () => {
+      const input = {
+        carCategory: mocks.validCarCategory,
+        customer: mocks.customer,
+        numberOfDays: 5,
+      };
+      await supertest(app)
+        .post("/transaction/register")
+        .send(input)
+        .expect(201);
+    });
+
+    it("should request transaction register route and return http status 400", async () => {
+      await supertest(app).post("/transaction/register").send({}).expect(400);
+    });
+
+    it("should request transaction register route and return http status 404", async () => {
+      const input = {
+        carCategory: mocks.invalidCarCategory,
+        customer: mocks.customer,
+        numberOfDays: 5,
+      };
+      await supertest(app)
+        .post("/transaction/register")
+        .send(input)
+        .expect(404);
+    });
+  });
 });
