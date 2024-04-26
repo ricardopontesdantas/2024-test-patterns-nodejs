@@ -1,5 +1,10 @@
 const { describe, it, before, after } = require("mocha");
 const supertest = require("supertest");
+const mocks = {
+  validCarCategory: require("../mocks/valid-car-category.json"),
+  invalidCarCategory: require("../mocks/invalid-car-category.json"),
+  customer: require("../mocks/valid-customer.json"),
+};
 
 describe("API Suite Test", () => {
   let app;
