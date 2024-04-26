@@ -7,6 +7,11 @@ const carDatabase = join(__dirname, "..", "database", "cars.json");
 const routes = {
   "/available-car:post": async function (request, response) {
     const carCategory = JSON.parse(await once(request, "data"));
+    if (!Object.keys(carCategory).length) {
+      response.writeHead(400);
+      response.write("invalid payload");
+      response.end();
+    }
     const carService = new CarService({ cars: carDatabase });
     const availableCar = await carService.getAvailableCar(carCategory);
     if (!availableCar) {
