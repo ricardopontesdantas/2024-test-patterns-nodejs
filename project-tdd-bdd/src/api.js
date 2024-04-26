@@ -1,9 +1,26 @@
 const http = require("http");
+const { once } = require("events");
+const { join } = require("path");
+const CarService = require("./service/carService");
+const carDatabase = join(__dirname, "..", "database", "cars.json");
 
 const routes = {
+  "/available-car:post": async function (request, response) {
+    const carCategory = JSON.parse(await once(request, "data"));
+    const carService = new CarService({ cars: carDatabase });
+    const availableCar = await carService.getAvailableCar(carCategory);
+    if (!availableCar) {
+      response.writeHead(404);
+      response.write("resource not found");
+      return response.end();
+    }
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.write(JSON.stringify(availableCar));
+    return response.end();
+  },
   default: function (request, response) {
     response.writeHead(404);
-    response.write("not found");
+    response.write("resource not found");
     return response.end();
   },
 };
