@@ -23,6 +23,25 @@ const routes = {
     response.write(JSON.stringify(availableCar));
     return response.end();
   },
+  "/calculate-price:post": async function (request, response) {
+    const { carCategory, customer, numberOfDays } = JSON.parse(
+      await once(request, "data")
+    );
+    if (!carCategory || !customer || !numberOfDays) {
+      response.writeHead(400);
+      response.write("invalid payload");
+      response.end();
+    }
+    const carService = new CarService({ cars: carDatabase });
+    const finalPrice = carService.calculateFinalPrice(
+      carCategory,
+      customer,
+      numberOfDays
+    );
+    response.writeHead(200);
+    response.write(JSON.stringify(finalPrice));
+    return response.end();
+  },
   default: function (request, response) {
     response.writeHead(404);
     response.write("resource not found");
